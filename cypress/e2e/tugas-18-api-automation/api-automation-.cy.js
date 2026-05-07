@@ -53,9 +53,9 @@ describe("Categories API - Platzi Fake Store", () => {
         if (response.status === 200) {
           expect(response.body).to.be.an("object");
           expect(response.body.slug).to.eq(validSlug);
-          cy.log(`✅ Kategori dengan slug '${validSlug}' ditemukan: ${response.body.name}`);
+          cy.log(`Kategori dengan slug '${validSlug}' ditemukan: ${response.body.name}`);
         } else {
-          cy.log(`⚠️ Slug endpoint mengembalikan 400 - endpoint mungkin tidak aktif`);
+          cy.log(`Slug endpoint mengembalikan 400 - endpoint mungkin tidak aktif`);
         }
       });
     });
@@ -122,7 +122,7 @@ describe("Categories API - Platzi Fake Store", () => {
         expect(firstProduct).to.include.keys("id", "title", "price", "category");
         expect(firstProduct.category.id).to.eq(categoryId);
       }
-      cy.log(`✅ Total produk dalam kategori ID ${categoryId}: ${response.body.length}`);
+      cy.log(`Total produk dalam kategori ID ${categoryId}: ${response.body.length}`);
     });
   });
   // 7. DELETE - Hapus Category
@@ -147,14 +147,14 @@ describe("Categories API - Platzi Fake Store", () => {
       }).then((deleteResponse) => {
         expect(deleteResponse.status).to.eq(200);
         expect(String(deleteResponse.body)).to.eq("true");
-        cy.log(`✅ Kategori ID ${idToDelete} berhasil dihapus`);
+        cy.log(`Kategori ID ${idToDelete} berhasil dihapus`);
         cy.request({
           method: "GET",
           url: `${BASE_URL}/categories/${idToDelete}`,
           failOnStatusCode: false,
         }).then((verifyResponse) => {
           expect(verifyResponse.status).to.be.oneOf([404, 400]);
-          cy.log("✅ Verifikasi: kategori sudah tidak ditemukan");
+          cy.log("Verifikasi: kategori sudah tidak ditemukan");
         });
       });
     });
